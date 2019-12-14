@@ -10,36 +10,16 @@ import java.io.IOException;
 import java.util.Random;
 
 public class GameView extends Application {
-    @FXML
-    public GridPane cardTable;
 
     @Override
     // Override the start method in the Application class
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("GameView.fxml"));
-        stage.setTitle("Typewriter");
+        Parent root = (new FXMLLoader(getClass().getResource("GameView.fxml"))).load();
+        stage.setTitle("U22 Card Game");
         stage.setScene(new Scene(root, 800, 500));
         stage.show();
-        Card[] cardDeck = new Card[20];
-        for (int i = 0; i < 20; i++){
-            cardDeck[i] = new Card(i);
-            System.out.println(cardDeck[i]);
-        }
-        int[] cardDrawn = new int[20];
-        int holder = 0;
-        for (int row = 0; row < 4; ++row) {
-            holder = randomIntGen();
-            for (int column = 0; column < 5; ++column) {
-                if (!duplicateCard(cardDrawn, holder)) {
-                    System.out.println(holder);
-                    System.out.println(cardDeck[holder]);
-                    cardTable.add(cardDeck[holder].backSide, column, row);
-                    cardDrawn[row * 5 + column] = holder;
-                    row++;
-                    column++;
-                }
-            }
-        }
+        GameController controller = new GameController();
+        controller.arrangeCard();
     }
 
 
