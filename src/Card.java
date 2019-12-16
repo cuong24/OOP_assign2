@@ -1,28 +1,24 @@
-import javafx.fxml.FXML;
-import javafx.scene.image.*;
-import javafx.application.Application;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.Scene;
-import javafx.scene.text.*;
-import java.util.*;
 
 public class Card {
-    @FXML
-    private ImageView frontSide;
-    @FXML
+    public ImageView frontSide;
     public ImageView backSide;
     private int ID;
 
     Card(int cardNum){
-        backSide = new ImageView(source_file(cardNum));
-        backSide.preserveRatioProperty();
-        backSide.setFitWidth(112);
-        frontSide = new ImageView("file:u22/Vietnam.png");
-        frontSide.preserveRatioProperty();
-        frontSide.setFitWidth(112);
-        ID = cardNum%10;
+        this.backSide = new ImageView(source_file(cardNum));
+        this.backSide.setFitWidth(112);
+        backSide.setPreserveRatio(true);
+        this.frontSide = new ImageView("file:src/Vietnam.png");
+        this.frontSide.preserveRatioProperty();
+        this.frontSide.setFitWidth(112);
+        frontSide.setPreserveRatio(true);
+        this.ID = cardNum%10;
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public String source_file (int cardDrawn){
@@ -31,5 +27,7 @@ public class Card {
         src_template.replace(9,src_template.length(),Integer.toString(cardDrawn)).append(".jfif");
         return src_template.toString();
     }
+
+
 
 }
